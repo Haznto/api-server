@@ -2,11 +2,11 @@
 
 ## Links of Work
 
-Deployed link Visit
+Deployed link [Visit](https://api-server-h1zz.onrender.com/)
 
-Pull Request Visit
+Pull Request [Visit](https://github.com/Haznto/api-server/pull/1)
 
-GitHub Actions Visit
+GitHub Actions [Visit](https://github.com/Haznto/api-server/actions)
 
 ## #About the project
 
