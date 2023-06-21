@@ -67,4 +67,69 @@ afterAll(async () => {
       expect(res.status).toBe(200);
       expect(res.body).toBe(null);
     })
+
+    //------------------------------------------------------------- New Related Model tests.
+
+    it('Create a record using POST', async () => {
+      const res = await req.post('/patient').send({
+          patient: 'Zaid',
+          gender: 'male'
+        });
+        const createdpatient = JSON.parse(res.text);
+        expect(res.status).toBe(201);
+        expect(createdpatient.patient).toEqual('Zaid')
+        expect(createdpatient.gender).toEqual('male')
+  });
+    it('Create a record using POST', async () => {
+      const res = await req.post('/medicines').send({
+          drug: 'Propranolol',
+          patientId: 1
+        });
+        const createdpatient = JSON.parse(res.text);
+        expect(res.status).toBe(201);
+        expect(createdpatient.drug).toEqual('Propranolol')
+        expect(createdpatient.patientId).toEqual(1)
+  });
+  
+  
+  it('Read a list of records using GET', async () => {
+    const res = await req.get('/patient');
+    console.log(res.body)
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  })
+
+  it('Read a record using GET', async () => {
+    const res = await req.get('/patient/1');
+    console.log(res.body)
+    expect(res.status).toBe(200);
+    expect(res.body.patient).toBe('Zaid');
+  })
+  it('Read a record using GET', async () => {
+    const res = await req.get('/patient-profile/1');
+    console.log(res.body)
+    expect(res.status).toBe(200);
+    expect(res.body.patient).toBe('Zaid');
+    expect(res.body.medicines[0].drug).toBe('Propranolol');
+  })
+  it('Update a record using PUT', async () => {
+    const res = await req.put('/patient/1').send({
+      patient: 'Hussam',
+      gender: 'male'
+    });
+    console.log(res.body)
+    expect(res.status).toBe(202)
+    expect(res.body.patient).toBe('Hussam');
+  })
+
+  it('Destroy a record using DELETE', async () => {
+    const res = await req.delete('/patient/1');
+    expect(res.status).toBe(200);
+    expect(res.body).toBe(null);
+  })
+  it('Destroy a record using DELETE if ID not exist', async () => {
+    const res = await req.delete('/patient/1321313');
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe("id not found in our database, change it to one that exists.");
+  })
   })
