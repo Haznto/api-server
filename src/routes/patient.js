@@ -1,10 +1,12 @@
 "use strict"
 
+//require dependencies
 const express = require('express');
 const {Patient, medsProfile} = require('../models/index')
 const {patientProfile} = require('../models/index')
 const router = express.Router();
 
+//definie router
 router.get('/patient',handleGetpatient)
 router.get('/patient',handleGetpatient)
 router.get('/patient/:id',handleGetpatientById)
@@ -22,18 +24,22 @@ router.delete('/patient/:id',handleDeletepatientById)
 // const onepatient = await Patient.findOne({ where: { id: id } });
 // res.status(200).json(onepatient);
 // }
+
+// GET all patient
 async function handleGetpatient(req,res) {
     const id = req.params.id;
 const onepatient = await patientProfile.read();
 res.status(200).json(onepatient);
 }
+
+// GET a single patient by ID
 async function handleGetpatientById(req,res) {
     const id = req.params.id;
 const onepatient = await patientProfile.read(id);
 res.status(200).json(onepatient);
 }
 
-
+// PUT update existing patient by ID
 async function handleUpdatepatientById(req,res) {
     const id = req.params.id;
     const obj = req.body;
@@ -41,11 +47,15 @@ async function handleUpdatepatientById(req,res) {
     // const onepatient = await Patient.findOne({ where: { id: id } });
 res.status(202).json(updatedPatient);
 }
+
+// POST create new patient
 async function handlePostpatient(req,res) {
 const obj = req.body;
 const Patients =  await patientProfile.create(obj)
 res.status(201).json(Patients);
 }
+
+// DELETE delete patient by ID
 async function handleDeletepatientById(req,res) {
     const id = req.params.id;
     const DeletedPatient = await patientProfile.delete(id);

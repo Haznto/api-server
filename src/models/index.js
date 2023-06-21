@@ -1,7 +1,8 @@
 'use strict'
-
+// importing the required dependencies.
 const { Sequelize, DataTypes } = require("sequelize");
 
+// Defining DATABASE_URL based on NODE_ENV && Defining the options for each environment.
 const DB_URL = process.env.NODE_ENV === 'test'?'sqlite:memory:' :process.env.DB_URL;
 
 let sequelizeOptions = process.env.NODE_ENV === 'production' ? {
@@ -15,8 +16,10 @@ let sequelizeOptions = process.env.NODE_ENV === 'production' ? {
 }
 :{}
 
+// Establishing the connection using sequelize.
 let sequelize = new Sequelize(DB_URL,sequelizeOptions);
 
+// importing the required dependencies.
 let profile = require('../models/lib/patient-profile')
 
 let records = require('./report.model')
@@ -33,6 +36,7 @@ medsModel.belongsTo(patientModel, {foreignKey: 'patientId', targetKey: 'id'})
 let patientProfile = new profile(patientModel)
 let medsProfile = new profile(medsModel)
 
+//exporing functionalities objects.
 module.exports = {
     db: sequelize,
     Records: records(sequelize,DataTypes),
