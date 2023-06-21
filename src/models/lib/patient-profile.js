@@ -1,5 +1,5 @@
 'use strict'
-
+// Creates a class to make new instances for each model, that has methods to perform CRUD.
 class PatientProfile {
     constructor(model){
         this.model = model;
