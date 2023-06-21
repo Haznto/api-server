@@ -11,11 +11,15 @@ const pageNotFound = require('./error-handlers/404')
 const serverError = require('./error-handlers/500')
 const recordsRouter = require('./routes/record')
 const gamesRouter = require('./routes/games')
+const medicineRouter = require('./routes/medicines')
+const patientRouter = require('./routes/patient')
 
 
 app.get('/', handleHome)
 app.use(recordsRouter)
 app.use(gamesRouter)
+app.use(medicineRouter)
+app.use(patientRouter)
 
 app.use('*', pageNotFound);
 app.use(serverError);
