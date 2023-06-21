@@ -8,6 +8,7 @@ Pull Request [Visit](https://github.com/Haznto/api-server/pull/1)
 
 GitHub Actions [Visit](https://github.com/Haznto/api-server/actions)
 
+---
 ## About the project
 
 it's a an express server that has two data models, each has it's own endpoints, built with sequelize.
